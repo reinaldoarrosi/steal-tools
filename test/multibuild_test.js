@@ -2237,5 +2237,28 @@ describe("multi build", function(){
 		});
 	});
 
+	it("minifies the whole bundle instead of individual nodes", function() {
+		return asap(rmdir)(path.join(__dirname, "bundle", "dist"))
+			.then(function() {
+				return multiBuild({
+					config: path.join(__dirname, "bundle", "stealconfig.js"),
+					main: "bundle"
+				}, {
+					quiet: true
+				});
+			})
+			.then(function() {
+				var bundle = fs.readFileSync(
+					path.join(__dirname, "bundle", "dist", "bundles", "bundle.js")
+				);
 
+				// matches /*stealconfig.js*/ comment
+				assert.ok(!/\/\*stealconfig.js\*\//.test(bundle),
+					"node name comment is removed when the bundle is minified");
+
+				// matches /*bundle*/ comment
+				assert.ok(!/\/\*bundle\*\//.test(bundle),
+					"node name comment is removed when the bundle is minified");
+			});
+	});
 });
