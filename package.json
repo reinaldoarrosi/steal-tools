@@ -47,7 +47,7 @@
     "mocha-lcov-reporter": "^1.2.0",
     "mock-fs": "4.0.0",
     "mockery": "^2.0.0",
-    "rimraf": "^2.5.2",
+    "rimraf": "^2.6.1",
     "serve-static": "^1.11.2",
     "steal-conditional": "^0.3.2",
     "steal-css": "^1.0.0",
